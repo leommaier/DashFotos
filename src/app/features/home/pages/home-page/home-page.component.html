@@ -1,0 +1,35 @@
+<app-header></app-header>
+
+<div class="home-container">
+  <h1>Aqui, suas lembranças sempre estarão presentes!</h1>
+  <div class="search-container">
+    <form>
+      <input
+        type="text"
+        id="search-box"
+        name="search-box"
+        placeholder="Busque por uma Dashfoto..."
+        (input)="search($event)"
+      />
+    </form>
+  </div>
+  <div *ngIf="dashfotos.length > 0; else noDashfotos">
+    <div class="dashfotos-container">
+      <div class="dashfoto" *ngFor="let dashfoto of dashfotos">
+        <img
+          src="{{ baseApiUrl }}uploads/{{ dashfoto.image }}"
+          alt="{{ dashfoto.title }}"
+        />
+        <h3>{{ dashfoto.title }}</h3>
+        <p class="date">{{ dashfoto.created_at }}</p>
+        <p>Comentários: {{ dashfoto.comments!.length }}</p>
+        <p><a routerLink="dashfotos/{{ dashfoto.id }}">Veja mais...</a></p>
+      </div>
+    </div>
+  </div>
+  <ng-template #noDashfotos>
+    <h1>Não há publicações para serem exibidas!</h1>
+  </ng-template>
+</div>
+
+<app-footer></app-footer>

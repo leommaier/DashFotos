@@ -1,0 +1,84 @@
+<app-header></app-header>
+
+<div class="dashfoto">
+  <h1>{{ dashfoto?.title }}</h1>
+  <img
+    src="{{ baseApiUrl }}uploads/{{ dashfoto?.image }}"
+    alt="{{ dashfoto?.title }}"
+  />
+  <div class="about-dashfoto">
+    <h3>Descrição:</h3>
+    <p>{{ dashfoto?.description }}</p>
+  </div>
+  <div class="actions">
+    <a routerLink="/dashfotos/edit/{{ dashfoto?.id }}" class="edit-btn"
+      >Editar</a
+    >
+    <button class="remove-btn" (click)="removeHandler(dashfoto?.id!)">
+      Remover
+    </button>
+  </div>
+  <div class="comments">
+    <h3>
+      Comentários ({{
+        (dashfoto?.comments)!.length > 0 ? (dashfoto?.comments)!.length : 0
+      }}):
+    </h3>
+    <div *ngIf="(dashfoto?.comments)!.length > 0; else noComments">
+      <div class="comment-container" *ngFor="let comment of dashfoto?.comments">
+        <p class="author">{{ comment.username | uppercase }}:</p>
+        <p class="comment">- {{ comment.text }}</p>
+      </div>
+    </div>
+    <ng-template #noComments>
+      <p>Não há comentários</p>
+    </ng-template>
+  </div>
+  <div class="comment-form">
+    <h3>Deixe um comentário:</h3>
+    <form
+      [formGroup]="commentForm"
+      #formDir="ngForm"
+      (ngSubmit)="onSubmit(formDir)"
+    >
+      <div class="form-group">
+        <label for="username">Usuário:</label>
+        <input
+          id="username"
+          name="username"
+          formControlName="username"
+          type="text"
+          placeholder="Digite seu nome"
+          autocomplete="off"
+          required
+        />
+        <div
+          *ngIf="username.invalid && formDir.submitted"
+          class="validation-error"
+        >
+          <p *ngIf="username.errors?.['required']">Título obrigatório!</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="text">Comentário</label>
+        <textarea
+          id="text"
+          name="text"
+          formControlName="text"
+          placeholder="Diga o que achou"
+          required
+        ></textarea>
+        <div *ngIf="text.invalid && formDir.submitted" class="validation-error">
+          <p *ngIf="text.errors?.['required']">Texto obrigatório!</p>
+        </div>
+      </div>
+      <input type="submit" value="Comentar!" />
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+<!--<div class="dashfoto" *ngIf="">
+    <h1>{{dashfoto.title}}</h1>
+</div>-->

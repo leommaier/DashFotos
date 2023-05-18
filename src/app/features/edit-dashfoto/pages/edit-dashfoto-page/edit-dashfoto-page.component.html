@@ -1,0 +1,15 @@
+<app-header></app-header>
+<div class="edit-container">
+  <div *ngIf="dashfoto">
+    <h2>
+      Editando publicação <span>"{{ dashfoto.title }}"</span>
+    </h2>
+  </div>
+  <app-dashfoto-form
+    (onSubmit)="editHandler($event)"
+    [dashfotoData]="dashfoto"
+    [btnText]="btnText"
+  ></app-dashfoto-form>
+</div>
+
+<app-footer></app-footer>

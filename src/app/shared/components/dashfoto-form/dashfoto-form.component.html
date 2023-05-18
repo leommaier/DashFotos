@@ -1,0 +1,43 @@
+<form (ngSubmit)="submit()" [formGroup]="dashfotoForm" #formDir="ngForm">
+  <input type="hidden" formControlName="id" />
+  <div class="form-group">
+    <label for="title">Título:</label>
+    <input
+      id="title"
+      name="title"
+      type="text"
+      placeholder="Insira o título"
+      formControlName="title"
+      required
+    />
+    <div *ngIf="title.invalid && formDir.submitted" class="validation-error">
+      <p *ngIf="title.errors?.['required']" class="error-msg">Título obrigatório!</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description">Descrição:</label>
+    <textarea
+      id="description"
+      name="description"
+      placeholder="Conte sobre sua experiência!"
+      formControlName="description"
+      required
+    ></textarea>
+    <div
+      *ngIf="description.invalid && formDir.submitted"
+      class="validation-error"
+    >
+      <p *ngIf="description.errors?.['required']" class="error-msg">Descrição obrigatória!</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="image">Insira sua foto:</label>
+    <input
+      id="image"
+      name="image"
+      type="file"
+      (change)="onFileSelected($event)"
+    />
+  </div>
+  <input type="submit" value="{{ btnText }}" />
+</form>

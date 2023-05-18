@@ -1,0 +1,12 @@
+<app-messages></app-messages>
+<nav>
+    <a class="logo-container" routerLink="/">
+        <img src="../../../../assets/images/cam-logo.png" alt="Dashfotos">
+        <h1>DashFotos</h1>
+    </a>
+    <ul class="links-container">
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/dashfotos/new" class="upload-dashfoto">Enviar</a></li>
+        <li class="date">{{dateToday | date: 'dd/MM/yyyy'}}<br>{{dateToday | date: 'H:mm'}}</li>        
+    </ul>
+</nav>
